@@ -21,13 +21,8 @@ const casas = {
 
 // Função para buscar personagens da API
 async function buscaPersonagem() {
-    try {
-        const response = await fetch("https://hp-api.onrender.com/api/characters");
-        characters = await response.json();
-        mostraPersonagem(currentIndex);
-    } catch (error) {
-        console.error("Erro ao buscar personagens:", error);
-    }
+    const response = await fetch("https://hp-api.onrender.com/api/characters");
+    characters = await response.json();
 }
 
 // Função para alterar o tema com base na casa
