@@ -69,11 +69,9 @@ header > div > button{
     border-radius: 10px;
 }
 
-
 header > div > button:hover{
     background-color: var(--fundo-dois);
 }
-
 
 
 main{
@@ -150,7 +148,7 @@ main > section > #texto > #voltar-avancar > button:hover{
 }
 
 
-.grifinoria{
+.Grifinoria{
 
     --cor-um: #740001;
     --cor-dois: white;
@@ -160,7 +158,7 @@ main > section > #texto > #voltar-avancar > button:hover{
     --fundo-tres: #d3a625;
 }
 
-.sonserina{
+.Sonserina{
 
     --cor-um: #1a472a;
     --cor-dois: white;
@@ -170,7 +168,7 @@ main > section > #texto > #voltar-avancar > button:hover{
     --fundo-tres: #5d8a6f;
 }
 
-.lufa-lufa{
+.Lufa-Lufa{
 
     --cor-um: #eeb939;
     --cor-dois: black;
@@ -180,7 +178,7 @@ main > section > #texto > #voltar-avancar > button:hover{
     --fundo-tres: #fff1a8;
 }
 
-.corvinal{
+.Corvinal{
 
     --cor-um: #0e1a40;
     --cor-dois: white;
