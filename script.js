@@ -58,12 +58,18 @@ prevBtn.addEventListener("click", () => {
     if (currentIndex > 0) {
         currentIndex--;
         mostraPersonagem(currentIndex);
+    } else if(currentIndex <= 0){
+        currentIndex = characters.length - 1;
+        mostraPersonagem(currentIndex);
     }
 });
 
 nextBtn.addEventListener("click", () => {
     if (currentIndex < characters.length - 1) {
         currentIndex++;
+        mostraPersonagem(currentIndex);
+    } else if(currentIndex >= characters.length - 1){
+        currentIndex = 0;
         mostraPersonagem(currentIndex);
     }
 });
