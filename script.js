@@ -48,11 +48,49 @@ const especies = {
     
 };
 
+const mensagensHP = {
+    400: "O Ministério da Magia detectou um feitiço inválido na sua requisição. Revise seus encantamentos antes de tentar novamente.",
+    
+    404: "Nenhum bruxo foi encontrado nos registros de Hogwarts. Talvez ele esteja escondido sob a capa da invisibilidade... ou simplesmente não exista.",
+    
+    500: "O castelo de Hogwarts enfrentou uma falha mágica inesperada. Até mesmo os melhores bruxos às vezes perdem o controle.",
+    
+    504: "A coruja se perdeu no caminho e a mensagem não chegou a tempo. Tente novamente quando os ventos mágicos estiverem mais favoráveis."
+};
+
 // Função para buscar personagens da API
 async function buscaPersonagem() {
-    const response = await fetch("https://hp-api.onrender.com/api/characters");
-    characters = await response.json();
-    mostraPersonagem(currentIndex);
+    try {
+        const response = await fetch(`https://hp-api.onrender.com/api/characters/`);
+
+        // erro HTTP (ex: 500, 404)
+        if (response.status !== 200) {
+            const mensagem =
+                mensagensHP[response.status] ||
+                "A varinha hesitou... algo deu errado no fluxo da magia. Tente novamente.";
+
+            throw new Error(`${mensagem} (HTTP ${response.status})`);
+        }
+
+        const data = await response.json();
+
+        // validação básica
+        if (!Array.isArray(data) || data.length === 0) {
+            throw new Error("Os pergaminhos de Hogwarts não retornaram nenhum registro. Talvez os arquivos mágicos estejam indisponíveis.");
+        }
+
+        characters = data;
+        mostraPersonagem(currentIndex);
+        console.log(response);
+
+    } catch (error) {
+        console.error("⚠️ Falha ao acessar os registros de Hogwarts:", error);
+
+        const mensagem = error.message || 
+            "Uma força desconhecida interferiu na magia. Tente novamente.";
+
+        alert(`🧙 ${mensagem}`);
+    }
 }
 
 // Função para alterar o tema com base na casa
@@ -107,24 +145,25 @@ nextBtn.addEventListener("click", () => {
 
 searchBtn.addEventListener("click", () => {
     const searchTerm = document.getElementById("search").value.toLowerCase();
+    const term = String(searchTerm).trim().replace(/\s+/g, ' ');
     const foundIndex = characters.findIndex((character) =>
-        character.name.toLowerCase().includes(searchTerm),
+        character.name.toLowerCase().includes(term),
     );
 
-    if (isNaN(searchTerm)) {
+    if (isNaN(term)) {
         if (foundIndex !== -1) {
             currentIndex = foundIndex;
             mostraPersonagem(currentIndex);
         } else {
-            alert("Personagem não encontrado!");
+            alert("🔎 Nenhum bruxo foi encontrado nos registros de Hogwarts. Talvez ele esteja sob efeito de um feitiço de ocultação.");
         }
-    } else if (!isNaN(searchTerm)) {
-        const index = Number(searchTerm) - 1; // Ajusta para índice baseado em 0
+    } else if (!isNaN(term)) {
+        const index = Number(term) - 1; // Ajusta para índice baseado em 0
         if (index >= 0 && index < characters.length) {
             currentIndex = index;
             mostraPersonagem(currentIndex);
         } else {
-            alert("Número fora do intervalo de personagens!");
+            alert("📜 Esse número não corresponde a nenhum registro no pergaminho mágico. Verifique e tente novamente.");
         }
     } 
 });
