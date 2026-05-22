@@ -48,6 +48,7 @@ const especies = {
     
 };
 
+// mapeamento mensagens erro
 const mensagensHP = {
     400: "O Ministério da Magia detectou um feitiço inválido na sua requisição. Revise seus encantamentos antes de tentar novamente.",
     
