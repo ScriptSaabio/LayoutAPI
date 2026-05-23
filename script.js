@@ -50,13 +50,13 @@ const temas = {
     cardLight: "bg-[#4a5d8c]",
     button: "bg-[#4a5d8c] hover:bg-[#3b4c73]",
   },
-};
-const temaDefault = {
+  Default: {
     body: "bg-gray-100 text-gray-900",
     header: "bg-gray-400",
     card: "bg-gray-300",
     cardLight: "bg-gray-200 text-black",
     button: "bg-gray-200 hover:bg-gray-300 text-black"
+  },
 };
 
 // Mapeamento de especie para classes CSS
@@ -137,7 +137,7 @@ async function buscaPersonagem() {
 // Função para alterar o tema com base na casa
 function mudaTema(house) {
 
-  const tema = temas[house] || temaDefault;
+  const tema = temas[house];
 
   if (!tema) return;
 
@@ -146,20 +146,28 @@ function mudaTema(house) {
 
   // HEADER
   const header = document.querySelector("header");
-  header.className = `p-4 flex flex-col md:flex-row items-center justify-between gap-4 ${tema.header}`;
+  if (header) {
+    header.className = `p-4 flex flex-col md:flex-row items-center justify-between gap-4 ${tema.header}`;
+  }
 
   // CARD IMAGEM
   const imgCard = document.getElementById("img");
-  imgCard.className = `p-4 rounded-xl flex items-center justify-center h-100 md:h-150 max-h-150 ${tema.card}`;
+  if (imgCard) {
+    imgCard.className = `p-4 rounded-xl flex items-center justify-center h-100 md:h-150 max-h-150 ${tema.card}`;
+  }
 
   // TEXTOS
   document.querySelectorAll("#texto p").forEach((p) => {
-    p.className = `p-3 rounded-lg text-sm md:text-base ${tema.cardLight}`;
+    if (p) {
+      p.className = `p-3 rounded-lg text-sm md:text-base ${tema.cardLight}`;
+    }
   });
 
   // BOTÕES
   document.querySelectorAll("button").forEach((btn) => {
-    btn.className = `flex-1 p-3 rounded-lg  transition ${tema.button}`;
+    if (btn) {
+      btn.className = `flex-1 p-3 rounded-lg transition ${tema.button}`;
+    }
   });
 }
 
@@ -175,7 +183,14 @@ function mostraPersonagem(index) {
   imgElement.src = character.image || "./assets/img/hogwarts.jpeg";
 
   // Alterar o tema com base na casa
-  mudaTema(character.house);
+  const house = character.house;
+  console.log("Casa do personagem:", house); // Debug: Verificar o valor da casa
+
+  if (house && house.trim() !== "") {
+    mudaTema(house);
+  } else {
+    mudaTema("Default");
+  }
 }
 
 // Event listeners para os botões
@@ -192,7 +207,7 @@ nextBtn.addEventListener("click", () => {
 });
 
 searchBtn.addEventListener("click", () => {
-  const searchTerm = document.getElementById("search").value.toLowerCase();
+  const searchTerm = document.getElementById("search").value.toLowerCase().trim();
 
   const term = String(searchTerm).trim().replace(/\s+/g, " ");
 
