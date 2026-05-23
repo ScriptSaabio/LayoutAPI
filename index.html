@@ -4,39 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Harry Potter</title>
+
+    <!-- Fonte -->
+    <style>
+        @font-face {
+            font-family: 'HarryPotter';
+            src: url('./assets/font/harry_p/HarryPotter.TTF') format('truetype');
+        }
+    </style>
+
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="./src/output.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- JavaScript -->
     <script src="./script.js" defer></script>
+
 </head>
 
-<body>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col transition duration-500">
 
-    <header>
-        <h1>Harry Potter</h1>
-        <div class="searchBox">
+    <!-- HEADER -->
+    <header class="bg-gray-400 p-4 flex flex-col md:flex-row items-center justify-between gap-4">
 
-            <input type="text" id="search" placeholder="Nome do personagem">
+        <h1 class="text-4xl md:text-6xl font-bold tracking-widest" style="font-family: HarryPotter;">
+            Harry Potter
+        </h1>
 
-            <button id="searchBtn">Buscar</button>
-
+        <div class="flex w-full md:w-auto gap-2">
+            <input type="text" id="search" placeholder="Nome do personagem"
+                class="flex-1 px-3 py-2 rounded-lg text-black bg-gray-200">
+            <button type="button" id="searchBtn" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition">
+                Buscar
+            </button>
         </div>
+
     </header>
 
-    <main>
-        <h1>Personagens</h1>
-        <section>
-            <div id="img"><img src="./img/hogwarts.jpeg" alt="IMG"></div>
-            <div id="texto">
-                <p id="name">Nome</p>
-                <p id="house">Casa</p>
-                <p id="actor">Ator</p>
-                <p id="species">Especie</p>
-                <div id="voltar-avancar">
-                    <button id="prevBtn" type="button">Anterior</button>
-                    <button id="nextBtn" type="button">Proximo</button>
-                </div>
+    <!-- MAIN -->
+    <main class="flex-1 flex flex-col items-center p-4 md:p-8">
+
+        <h2 class="text-4xl md:text-6xl mb-6 tracking-widest font-bold" style="font-family: HarryPotter;">
+            Personagens
+        </h2>
+
+        <!-- GRID RESPONSIVO -->
+        <section
+            class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full max-w-5xl mx-auto min-h-100 md:min-h-125 lg:min-h-150 items-stretch">
+
+            <!-- IMAGEM -->
+            <div id="img" class="bg-gray-300 p-4 rounded-xl flex items-center justify-center h-100 md:h-125 max-h-150">
+                <img src="./assets/img/hogwarts.jpeg" alt="Imagem representando Hogwarts"
+                    class="w-full h-full object-contain rounded-lg">
             </div>
+
+            <!-- TEXTO -->
+            <div id="texto" class="flex flex-col justify-between gap-4">
+
+                <p id="name" class="bg-gray-200 p-3 rounded-lg text-sm md:text-base">Nome</p>
+                <p id="house" class="bg-gray-200 p-3 rounded-lg text-sm md:text-base">Casa</p>
+                <p id="actor" class="bg-gray-200 p-3 rounded-lg text-sm md:text-base">Ator</p>
+                <p id="species" class="bg-gray-200 p-3 rounded-lg text-sm md:text-base">Espécie</p>
+
+                <!-- BOTÕES -->
+                <div class="flex justify-between gap-4 mt-4">
+                    <button type="button" id="prevBtn"
+                        class="flex-1 p-3 rounded-lg  transition bg-gray-200 hover:bg-gray-300">
+                        Anterior
+                    </button>
+                    <button type="button" id="nextBtn"
+                        class="flex-1 p-3 rounded-lg  transition bg-gray-200 hover:bg-gray-300">
+                        Próximo
+                    </button>
+                </div>
+
+            </div>
+
         </section>
+
     </main>
 
 </body>
