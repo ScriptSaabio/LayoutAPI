@@ -21,21 +21,28 @@
     <!-- JavaScript -->
     <script src="./script.js" defer></script>
 
+    <!-- Icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
 
 <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col transition duration-500">
 
     <!-- HEADER -->
     <header class="bg-gray-400 p-4 flex flex-col md:flex-row items-center justify-between gap-4">
-
-        <h1 class="text-4xl md:text-6xl font-bold tracking-widest" style="font-family: HarryPotter;">
-            Harry Potter
-        </h1>
+        <div class="flex items-center gap-4">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-widest" style="font-family: HarryPotter;">
+                Harry Potter
+            </h1>
+            <i id="wandIcon" class="fa-solid fa-wand-sparkles cursor-pointer text-4xl md:text-5xl"
+                title="Que a varinha escolha o momento… lance o feitiço!"></i>
+        </div>
 
         <div class="flex w-full md:w-auto gap-2">
             <input type="text" id="search" placeholder="Nome do personagem"
                 class="flex-1 px-3 py-2 rounded-lg text-black bg-gray-200">
-            <button type="button" id="searchBtn" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition">
+            <button type="button" id="searchBtn"
+                class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition  cursor-pointer">
                 Buscar
             </button>
         </div>
@@ -44,6 +51,9 @@
 
     <!-- MAIN -->
     <main class="flex-1 flex flex-col items-center p-4 md:p-8">
+
+        <i id="hatIcon" class="fa-solid fa-hat-wizard text-5xl md:text-6xl transition duration-500 cursor-pointer"
+            title="Deixe o Chapéu decidir seu caminho em Hogwarts"></i>
 
         <h2 class="text-4xl md:text-6xl mb-6 tracking-widest font-bold" style="font-family: HarryPotter;">
             Personagens
@@ -70,11 +80,11 @@
                 <!-- BOTÕES -->
                 <div class="flex justify-between gap-4 mt-4">
                     <button type="button" id="prevBtn"
-                        class="flex-1 p-3 rounded-lg  transition bg-gray-200 hover:bg-gray-300">
+                        class="flex-1 p-3 rounded-lg  transition bg-gray-200 hover:bg-gray-300 cursor-pointer">
                         Anterior
                     </button>
                     <button type="button" id="nextBtn"
-                        class="flex-1 p-3 rounded-lg  transition bg-gray-200 hover:bg-gray-300">
+                        class="flex-1 p-3 rounded-lg  transition bg-gray-200 hover:bg-gray-300 cursor-pointer">
                         Próximo
                     </button>
                 </div>

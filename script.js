@@ -6,7 +6,10 @@ const speciesElement = document.getElementById("species");
 const imgElement = document.querySelector("#img img");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
+const searchInput = document.getElementById("search");
 const searchBtn = document.getElementById("searchBtn");
+const hatIcon = document.getElementById("hatIcon");
+const wandIcon = document.getElementById("wandIcon");
 
 // Variáveis para controle do Index
 let characters = [];
@@ -28,6 +31,7 @@ const temas = {
     card: "bg-[#ae0001]",
     cardLight: "bg-[#d3a625] text-black",
     button: "bg-[#d3a625] text-black hover:bg-[#c2951f]",
+    icon: "text-[#d3a625] text-5xl md:text-6xl"
   },
   Slytherin: {
     body: "bg-[#0f2e1c] text-white",
@@ -35,6 +39,7 @@ const temas = {
     card: "bg-[#2a623d]",
     cardLight: "bg-[#5d8a6f]",
     button: "bg-[#5d8a6f] hover:bg-[#4e765e]",
+    icon: "text-[#5d8a6f] text-5xl md:text-6xl"
   },
   Hufflepuff: {
     body: "bg-[#fff6d8] text-black",
@@ -42,6 +47,7 @@ const temas = {
     card: "bg-[#f0c75e]",
     cardLight: "bg-[#fff1a8]",
     button: "bg-[#f0c75e] hover:bg-[#ddb84f]",
+    icon: "text-[#eeb939] text-5xl md:text-6xl"
   },
   Ravenclaw: {
     body: "bg-[#0a112b] text-white",
@@ -49,14 +55,16 @@ const temas = {
     card: "bg-[#222f5b]",
     cardLight: "bg-[#4a5d8c]",
     button: "bg-[#4a5d8c] hover:bg-[#3b4c73]",
+    icon: "text-[#4a5d8c] text-5xl md:text-6xl"
   },
   Default: {
     body: "bg-gray-100 text-gray-900",
     header: "bg-gray-400",
     card: "bg-gray-300",
     cardLight: "bg-gray-200 text-black",
-    button: "bg-gray-200 hover:bg-gray-300 text-black"
-  },
+    button: "bg-gray-200 hover:bg-gray-300 text-black",
+    icon: "text-gray-500 text-5xl md:text-6xl"
+  }
 };
 
 // Mapeamento de especie para classes CSS
@@ -166,9 +174,17 @@ function mudaTema(house) {
   // BOTÕES
   document.querySelectorAll("button").forEach((btn) => {
     if (btn) {
-      btn.className = `flex-1 p-3 rounded-lg transition ${tema.button}`;
+      btn.className = `flex-1 p-3 rounded-lg transition cursor-pointer ${tema.button}`;
     }
   });
+
+  // ÍCONE
+  const icon = document.getElementById("houseIcon");
+
+  if (icon) {
+    icon.className = `fa-solid fa-hat-wizard transition duration-500 ${tema.icon}`;
+  }
+
 }
 
 // Função para exibir um personagem
@@ -242,6 +258,48 @@ Por favor, diga o nome de um bruxo para que eu possa decidir seu destino nos cor
       );
     }
   }
+});
+
+searchInput.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    searchBtn.click();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (!characters.length) return;
+
+  if (event.key === "ArrowRight") {
+    nextBtn.click();
+  }
+
+  if (event.key === "ArrowLeft") {
+    prevBtn.click();
+  }
+});
+
+hatIcon.addEventListener("click", () => {
+  if (!characters.length) return;
+
+  const min = 0;
+  const max = characters.length - 1;
+
+  const randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  currentIndex = randomIndex;
+  mostraPersonagem(currentIndex);
+});
+
+wandIcon.addEventListener("click", () => {
+  if (!characters.length) return;
+
+  const min = 0;
+  const max = characters.length - 1;
+
+  const randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  currentIndex = randomIndex;
+  mostraPersonagem(currentIndex);
 });
 
 // Iniciar a aplicação
