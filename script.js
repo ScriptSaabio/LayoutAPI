@@ -231,6 +231,7 @@ searchBtn.addEventListener("click", () => {
     character.name.toLowerCase().includes(term),
   );
 
+
   if (searchTerm === "") {
     alert(
       `🎩 O Chapéu Seletor não sentiu nenhuma presença em sua mente…
